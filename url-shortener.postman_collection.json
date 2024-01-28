@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "b3478516-efc1-40e1-a295-9cd7acf1ccc0",
+		"name": "url-shortener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26283977"
+	},
+	"item": [
+		{
+			"name": "Create ShortUrl",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"originalUrl\": \"https://google.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/short-urls",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"short-urls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all shortUrls",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/short-urls",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"short-urls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get shortUrls by alias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/short-urls/:alias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"short-urls",
+						":alias"
+					],
+					"variable": [
+						{
+							"key": "alias",
+							"value": "eCwyht6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Redirect to originalUrl",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/short-urls/r/:alias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"short-urls",
+						"r",
+						":alias"
+					],
+					"variable": [
+						{
+							"key": "alias",
+							"value": "yOHqta"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "short-urls/analytics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/short-urls/analytics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"short-urls",
+						"analytics"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

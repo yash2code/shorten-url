@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: nextjs-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile # Ensure you have a Dockerfile in your Next.js app directory
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  backend:
+    container_name: nestjs-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile # Ensure you have a Dockerfile in your Nest.js app directory
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db:
+    container_name: postgres-db
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata:
