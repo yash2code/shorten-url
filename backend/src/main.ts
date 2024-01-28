@@ -4,7 +4,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: 'https://url-shorten-fe-0dc5cd6d3c7b.herokuapp.com/',
     credentials: true,
   });
 
