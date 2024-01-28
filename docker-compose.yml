@@ -4,7 +4,7 @@ services:
   frontend:
     container_name: nextjs-frontend
     build:
-      context: ./frontend
+      context: ./Frontend
       dockerfile: Dockerfile # Ensure you have a Dockerfile in your Next.js app directory
     ports:
       - "3000:3000"
