@@ -16,6 +16,7 @@ const databaseConfig: DataSourceOptions = isProduction
     ssl: {
       rejectUnauthorized: false, // Required for Heroku's self-signed certificates
     },
+    entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: false, // Should be false in production for safety
   }
   : {
