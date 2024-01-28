@@ -17,7 +17,7 @@ const databaseConfig: DataSourceOptions = isProduction
       rejectUnauthorized: false, // Required for Heroku's self-signed certificates
     },
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    synchronize: false, // Should be false in production for safety
+    synchronize: true, // Should be false in production for safety
   }
   : {
     type: 'postgres',
