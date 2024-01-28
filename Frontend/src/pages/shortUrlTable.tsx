@@ -42,8 +42,8 @@ const ShortUrlTable: React.FC = () => {
             <tr key={url.id}>
               <td className="border border-gray-300 p-2">{url.originalUrl}</td>
               <td className="border border-gray-300 p-2">
-                <a href={`http://localhost:5000/short-urls/r/${url.shortAlias}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">
-                  {`http://localhost:5000/short-urls/r/${url.shortAlias}`}
+                <a href={`https://url-shorten-app-a15219219fbc.herokuapp.com/short-urls/r/${url.shortAlias}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">
+                  {`https://url-shorten-app-a15219219fbc.herokuapp.com/short-urls/r/${url.shortAlias}`}
                 </a>
               </td>
             </tr>
