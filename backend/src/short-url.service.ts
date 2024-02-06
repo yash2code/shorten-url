@@ -22,12 +22,12 @@ export class ShortUrlService {
         this.snowflakeIdGenerator = new Snowflake({
             instance_id: 1
         });
-        this.defaultExpiryMinutes = parseInt(process.env.SHORT_URL_EXPIRY) || 5; // Default to 1 minute
+        this.defaultExpiryMinutes = parseInt(process.env.SHORT_URL_EXPIRY) || 5; // Default to 5 minutes
 
     }
 
     @Transactional()
-    async createShortUrl(originalUrl: string): Promise<ShortUrl> {
+    async createShortUrl(originalUrl: string, expiryTime: number): Promise<ShortUrl> {
         const shortUrl = new ShortUrl();
         shortUrl.originalUrl = originalUrl;
 
@@ -38,7 +38,7 @@ export class ShortUrlService {
         const idToBase62 = base62.encode(uniqueId as bigint)
         shortUrl.shortAlias = idToBase62
 
-        const expiryDate = moment().tz("UTC").add(this.defaultExpiryMinutes, 'minutes').toDate();
+        const expiryDate = expiryTime ? moment().tz("UTC").add(expiryTime, 'minutes').toDate() : moment().tz("UTC").add(this.defaultExpiryMinutes, 'minutes').toDate();
         shortUrl.expiryDate = expiryDate;
 
         return this.shortUrlRepository.save(shortUrl);
@@ -49,7 +49,11 @@ export class ShortUrlService {
     }
 
     async findAll(): Promise<ShortUrl[]> {
-        return await this.shortUrlRepository.find();
+        return await this.shortUrlRepository.find({
+            order: {
+                createdAt: 'desc'
+            }
+        });
     }
 
     async trackAccess(alias: string): Promise<void> {

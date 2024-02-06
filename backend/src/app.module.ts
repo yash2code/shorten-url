@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { TransactionModule } from 'nestjs-transaction';
 import { ShortUrlController } from './short-url.controller';
 import { ShortUrlService } from './short-url.service';
@@ -9,7 +9,7 @@ import { DataSourceOptions } from 'typeorm';
 
 const isProduction = process.env.DATABASE_URL !== undefined;
 
-const databaseConfig: DataSourceOptions = isProduction
+const databaseConfig: TypeOrmModuleOptions = isProduction
   ? {
     type: 'postgres',
     url: process.env.DATABASE_URL, // Use Heroku's DATABASE_URL in production
@@ -21,11 +21,12 @@ const databaseConfig: DataSourceOptions = isProduction
   }
   : {
     type: 'postgres',
-    host: 'db', // Use Docker service name in development
+    host: 'localhost', // Use Docker service name in development
     port: 5432,
     username: 'user',
     password: 'password',
     database: 'mydb',
+    autoLoadEntities: true,
     synchronize: true, // Can be true in development
   };
 

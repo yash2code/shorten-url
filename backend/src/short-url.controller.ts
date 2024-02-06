@@ -8,9 +8,9 @@ export class ShortUrlController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(@Body('originalUrl') originalUrl: string) {
+  async create(@Body('originalUrl') originalUrl: string, @Body('expiryTime') expiryTime: number) {
 
-    return await this.shortUrlService.createShortUrl(originalUrl);
+    return await this.shortUrlService.createShortUrl(originalUrl, expiryTime);
   }
 
   @Get()
