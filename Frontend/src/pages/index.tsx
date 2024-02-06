@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 const ShortenPage: React.FC = () => {
   const [url, setUrl] = useState<string>('');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [expiryTime, setExpiryTime] = useState<number>(5);// in minutes
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,7 +30,8 @@ const ShortenPage: React.FC = () => {
     const isValidUrl = validateUrl()
     if (!isValidUrl) return toast.error('Invalid Url')
     const body = {
-      originalUrl: url
+      originalUrl: url,
+      expiryTime
     }
     toast.promise(
       axiosInstance.post('/short-urls', body),
@@ -72,6 +74,11 @@ const ShortenPage: React.FC = () => {
           onChange={(e) => setUrl(e.target.value)}
           onKeyDown={handleKeyPress}
           className="w-full p-2 border border-gray-300 rounded-md text-black sm:max-w-md mx-auto"
+        />
+        <input type="number"
+          value={expiryTime}
+          onChange={e => setExpiryTime(parseInt(e.target.value))}
+          className="w-full p-2 border border-gray-300 rounded-md text-black sm:max-w-md mx-auto mt-2"
         />
         <button
           onClick={handleSubmit}
